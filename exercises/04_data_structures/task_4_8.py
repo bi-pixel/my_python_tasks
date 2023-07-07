@@ -23,3 +23,8 @@
 """
 
 ip = "192.168.3.1"
+ot = ip.split('.')
+template = '''{0:<8}  {1:<8}  {2:<8}  {3:<8}
+{0:0>8b}  {1:0>8b}  {2:0>8b}  {3:0>8b}'''
+
+print(template.format(int(ot[0]), int(ot[1]), int(ot[2]), int(ot[3])))
