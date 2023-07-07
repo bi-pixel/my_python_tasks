@@ -21,3 +21,12 @@ words = [
     'Guido', 'van', 'Rossum', 'began', 'working', 'on',
     'Python', 'in', 'the', 'late', '1980s',
 ]
+# print(str(str(words).split(',')).replace('\'', '').replace(
+#     '"', '').replace(',  ', ' ').strip('[]'))
+
+# output = ''
+# for word in words:
+#     output += word + ' '
+# print(output)
+
+print(' '.join(words))
