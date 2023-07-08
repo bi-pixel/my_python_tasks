@@ -51,3 +51,8 @@ london_co = {
         "routing": True,
     },
 }
+
+
+device = input('Choice a device name  - r1, r2 or sw1: ').lower()
+parameter = (input('Enter parameter name: ')).lower()
+print(london_co[device][parameter])
