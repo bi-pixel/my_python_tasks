@@ -49,3 +49,29 @@ Mask:
 255       255       255       240
 11111111  11111111  11111111  11110000
 """
+
+
+addresses = input('Enter ip address (format 10.1.1.0 255.255.255.0): ')
+ip = addresses.split()[0].split('.')
+mask = addresses.split()[1].split('.')
+oct1, oct2, oct3, oct4 = [
+    int(ip[0]),
+    int(ip[1]),
+    int(ip[2]),
+    int(ip[3])
+]
+m1, m2, m3, m4 = [
+    int(mask[0]),
+    int(mask[1]),
+    int(mask[2]),
+    int(mask[3])
+]
+mask_short = str('{:b}{:b}{:b}{:b}'.format(m1, m2, m3, m4).count('1'))
+template = '''{0:<8}  {1:<8}  {2:<8}  {3:<8}
+{0:0>8b}  {1:0>8b}  {2:0>8b}  {3:0>8b}'''
+
+print('\nNetwork:')
+print(template.format(oct1, oct2, oct3, oct4))
+print('\nMask:')
+print('/' + mask_short)
+print(template.format(m1, m2, m3, m4))
