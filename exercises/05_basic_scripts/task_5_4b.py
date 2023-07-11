@@ -42,4 +42,37 @@ bin_ip = "0000101000000001000000111000011"
 А адреса мережі буде перших 28 символів з bin_ip + 0000 (4 тому що всього в
 адресі може бути 32 біти, а 32 - 28 = 4)
 00001010000000010000000111000000
-""
+"""
+
+
+addresses = input('Enter ip address (format 10.1.1.0 255.255.255.0): ')
+ip = addresses.split()[0].split('.')
+mask = addresses.split()[1].split('.')
+oct1, oct2, oct3, oct4 = [
+    int(ip[0]),
+    int(ip[1]),
+    int(ip[2]),
+    int(ip[3])
+]
+m1, m2, m3, m4 = [
+    int(mask[0]),
+    int(mask[1]),
+    int(mask[2]),
+    int(mask[3])
+]
+mask_short = str('{:b}{:b}{:b}{:b}'.format(m1, m2, m3, m4).count('1'))
+template = '''{0:<8}  {1:<8}  {2:<8}  {3:<8}
+{0:0>8b}  {1:0>8b}  {2:0>8b}  {3:0>8b}'''
+forward = '0' * (32 - int(mask_short))
+network_ip_bin = '{0:0>8b}{1:0>8b}{2:0>8b}{3:0>8b}'.format(oct1, oct2, oct3, oct4)[
+    :int(mask_short)] + forward
+network_ip = f"{int(network_ip_bin[:8], 2)}.{int(network_ip_bin[8:16], 2)}.{int(network_ip_bin[16:24], 2)}.{int(network_ip_bin[24:], 2)}"
+
+print('\nNetwork:')
+print(template.format(int(network_ip_bin[:8], 2), int(network_ip_bin[8:16], 2), int(network_ip_bin[16:24], 2), int(network_ip_bin[24:], 2)))
+print('\nMask:')
+print('/' + mask_short)
+print(template.format(m1, m2, m3, m4))
+
+
+
