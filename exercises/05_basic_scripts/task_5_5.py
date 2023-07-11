@@ -61,3 +61,16 @@ trunk_template = """switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan {}
 """
+
+interface_mode = input('режим інтерфейсу (access або trunk): ')
+interface = input('інтерфейс (тип та номер, виду Gi0/3): ')
+vlan = input('номер VLAN :')
+
+d = {'access': access_template, 'trunk': trunk_template}
+print(f'\ninterface {interface}')
+print(d.get(interface_mode).format(vlan))
+
+# if interface_mode == 'access':
+#     print(access_template.format(vlan))
+# elif interface_mode == 'trunk':
+#     print(trunk_template.format(vlan))
