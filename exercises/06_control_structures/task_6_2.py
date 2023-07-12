@@ -15,4 +15,12 @@ Python.
 """
 
 line = "Guido van Rossum began working on Python in the late 1980s"
+vowels = "AaEeIiOoUuYy"
+result = ''
 
+for ch in line:
+    if ch in vowels and ch.islower:
+        ch = ch.upper()
+    result += ch
+    
+print(result)
