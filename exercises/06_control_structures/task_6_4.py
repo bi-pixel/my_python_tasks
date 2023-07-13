@@ -22,3 +22,17 @@
 files = [
     "cfg_1.txt", "cfg_4.txt", "cfg_8.txt", "cfg_9.txt", "cfg_12.txt", "cfg_15.txt"
 ]
+result = []
+
+for file in files:
+    filename_text = file.split('_')[0]
+    filename_digits = file.split('_')[1].split('.')[0]
+    filename_extension = file.split('.')[1]
+    if len(filename_digits) < 2:
+        filename_digits = f'0{filename_digits}'
+        result.append(f'{filename_text}_{filename_digits}.{filename_extension}')
+    else:
+        result.append(file)
+    
+
+print(result)
