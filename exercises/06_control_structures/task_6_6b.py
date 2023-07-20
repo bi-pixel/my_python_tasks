@@ -46,9 +46,7 @@ while True:
         break
 
 
-if not netutils.ip.is_ip(ip):
-    print('Wrong IP address')
-elif ip == '255.255.255.255':
+if ip == '255.255.255.255':
     print('local broadcast')
 elif ip == '0.0.0.0':
     print('unassigned')
