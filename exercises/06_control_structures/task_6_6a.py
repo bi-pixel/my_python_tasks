@@ -46,3 +46,21 @@ $ python task_6_6a.py
 Enter IP address: 50.1.1.1.1
 Wrong IP address
 """
+import netutils.ip
+
+# def oct_check(oct: str):
+#     if oct.is
+ip = input('Enter IP address: ')
+
+if not netutils.ip.is_ip(ip):
+    print('Wrong IP address')
+elif ip == '255.255.255.255':
+    print('local broadcast')
+elif ip == '0.0.0.0':
+    print('unassigned')
+elif 1 <= int(ip.split('.')[0]) <= 223:
+    print('unicast')
+elif 224 <= int(ip.split('.')[0]) <= 239:
+    print('multicast')
+else:
+    print('unused')
