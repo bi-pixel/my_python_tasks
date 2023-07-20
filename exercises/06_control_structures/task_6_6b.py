@@ -34,3 +34,31 @@ Enter IP address: 255.255.255.255
 local broadcast
 
 """
+
+
+import netutils.ip
+
+
+def ip_check(ip):
+    if not netutils.ip.is_ip(ip):
+        print('Wrong IP address')
+    elif ip == '255.255.255.255':
+        print('local broadcast')
+    elif ip == '0.0.0.0':
+        print('unassigned')
+    elif 1 <= int(ip.split('.')[0]) <= 223:
+        print('unicast')
+    elif 224 <= int(ip.split('.')[0]) <= 239:
+        print('multicast')
+    else:
+        print('unused')
+
+
+while True:
+    ip = input('Enter IP address: ')
+    if not netutils.ip.is_ip(ip):
+        print('Wrong IP address')
+    else:
+        break
+
+ip_check(ip)
