@@ -19,7 +19,7 @@ result = []
 for item in data:
     try:
         result.append(int(item))
-    except:
+    except ValueError:
         pass
     
 print(result)       
