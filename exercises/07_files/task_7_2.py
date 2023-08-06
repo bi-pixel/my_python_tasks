@@ -40,3 +40,19 @@ interface Ethernet0/3
 ...
 
 """
+
+from sys import argv
+from pprint import pprint
+
+if len(argv) > 1:
+    conf_file = argv[1]
+else:
+    print('додайте конфіг в якості аргументу')
+    exit()
+
+with open(conf_file, 'r') as file:
+    data = file.readlines()
+
+for line in data:
+    if not line.startswith('!'):
+        print(line.rstrip())
