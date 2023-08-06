@@ -17,3 +17,14 @@ MAC-адреса, має бути оброблена таким чином, що
 1000     0a4b.c380.7d00      Gi0/9
 
 """
+
+with open('CAM_table.txt') as src_file:
+    for line in src_file:
+        try:
+            mac_len = len(line.split()[1])
+        except IndexError:
+            pass
+        else:
+            if mac_len == 14:
+                vlan, mac, type, port= line.split()
+                print(f'{vlan:9} {mac} {port:>10}')
