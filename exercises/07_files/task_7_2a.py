@@ -47,4 +47,18 @@ line vty 0 4
 передається як аргумент скрипту.
 """
 
+from sys import argv
+
 ignore = ["duplex", "alias", "configuration", "end", "service"]
+
+if len(argv) > 1:
+    conf_file = argv[1]
+else:
+    print('додайте конфіг в якості аргументу')
+    exit()
+
+with open(conf_file, 'r') as file:
+    for line in file:
+        if not any(elem in line for elem in ignore):
+            if not line.startswith('!'):
+                print(line.rstrip())
