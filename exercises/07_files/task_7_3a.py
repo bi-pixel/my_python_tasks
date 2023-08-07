@@ -39,21 +39,6 @@ sort, якщо сортувати перелік списків вище.
 """
 from pprint import pprint
 output = []
-# with open('CAM_table.txt') as src_file:
-#     for line in src_file:
-#         try:
-#             mac_len = len(line.split()[1])
-#         except IndexError:
-#             pass
-#         else:
-#             if mac_len == 14:
-#                 vlan, mac, type, port= line.split()
-#                 output.append(f'{int(vlan):9} {mac} {port:>10}')
-
-# output.sort()
-# for line in output:
-#     line = line.split()
-#     print(f'{line[0]:9} {line[1]} {line[2]:>10}')
 
 with open('CAM_table.txt') as src_file:
     for line in src_file:
@@ -65,7 +50,6 @@ with open('CAM_table.txt') as src_file:
             if mac_len == 14:
                 vlan, mac, type, port = line.split()
                 output.append([int(vlan), mac, port])
- 
+
 for vlan, mac, port in sorted(output):
     print(f'{vlan:<9} {mac} {port:>10}')
-
