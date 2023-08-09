@@ -38,4 +38,19 @@ config_trunk_sw3.txt. Переконайтеся, що в результаі д�
 знаходиться в режимі trunk, якщо в нього налаштована команда:
 switchport trunk allowed vlan.
 """
-from pprint import pprint
+from sys import argv
+
+try:
+    src_conf_file = argv[1]
+except IndexError:
+    print('Додайте аргумент до скрипту!')
+    exit()
+
+trunk_dict = {}
+with open(src_conf_file) as src:
+    for line in src:
+        if line.startswith('interface'):
+            intf = line.split()[1]
+        elif 'trunk allowed' in line:
+            vlans = line.split()[4]
+            trunk_dict[intf] = vlans.split(',')
