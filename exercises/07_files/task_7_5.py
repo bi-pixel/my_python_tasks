@@ -63,3 +63,23 @@ config_trunk_sw3.txt. Переконайтеся, що в результаі д�
 
 """
 from pprint import pprint
+from sys import argv
+
+try:
+    src_conf_file = argv[1]
+except IndexError:
+    print('Додайте аргумент до скрипту!')
+    exit()
+
+interface_dict = {}
+with open(src_conf_file) as src:
+    for line in src:
+        if 'FastEthernet' in line:
+            intf = line.split()[-1]
+            interface_dict[intf] = []
+        elif 'switchport' in line:
+            interface_dict[intf].append(line.strip())
+
+pprint(interface_dict)
+
+
