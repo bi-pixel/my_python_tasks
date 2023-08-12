@@ -62,6 +62,8 @@ Out[6]:
 У завданнях 9го розділу і далі, крім зазначеної функції, можна створювати
 будь-які додаткові функції.
 """
+from pprint import pprint
+
 access_dict = {"FastEthernet0/12": 10, "FastEthernet0/14": 11}
 access_dict_2 = {
     "FastEthernet0/3": 100,
@@ -78,3 +80,16 @@ access_cmd_list = [
     "spanning-tree bpduguard enable",
 ]
 cmd_list = ["switchport mode access", "switchport access vlan"]
+
+
+def generate_access_config(intf_vlan_dict: dict, access_template: list):
+    result = []
+    for interface, vlan in intf_vlan_dict.items():
+        result.append(f'interface {interface}')
+        for access in access_template:
+            if 'access vlan' in access:
+                result.append(f'{access} {vlan}')
+            else:
+                result.append(access)
+    return result
+
