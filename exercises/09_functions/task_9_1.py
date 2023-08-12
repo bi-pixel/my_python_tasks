@@ -35,6 +35,19 @@ aa:aa:bb:bb:cc:cc
 У завданнях 9го розділу і далі, крім зазначеної функції, можна створювати
 будь-які додаткові функції.
 """
+from pprint import pprint
+from rich.traceback import install
+install(show_locals=True)
 
 mac_list = ["1a1b.2c2d.3e3f", "aaaa.bbbb.cccc", "1111.2222.3333"]
 
+
+def convert_mac(mac_address):
+    mac = mac_address.replace('.', '')
+    new_mac = []
+    for index in range(0, len(mac), 2):
+        new_mac.append(mac[index: index +2])
+    return ':'.join(new_mac)
+
+
+print(convert_mac("1a1b.2c2d.3e3f"))
