@@ -56,6 +56,7 @@ Out[9]:
 У завданнях 9го розділу і далі, крім зазначеної функції, можна створювати
 будь-які додаткові функції.
 """
+from pprint import pprint
 
 trunk_cmd_list = [
     "switchport mode trunk",
@@ -74,3 +75,19 @@ trunk_dict_2 = {
     "FastEthernet0/15": [111, 130],
     "FastEthernet0/14": [117],
 }
+
+
+def generate_trunk_config(intf_vlan_dict: dict, trunk_template: list):
+    result = []
+    for interface, vlan in intf_vlan_dict.items():
+        result.append(f'interface {interface}')
+        for access in trunk_template:
+            if 'allowed vlan' in access:
+                vlan = ','.join(str(item) for item in vlan)
+                result.append(f'{access} {vlan}')
+            else:
+                result.append(access)
+    return result
+
+
+pprint(generate_trunk_config(trunk_dict, trunk_cmd_list))
