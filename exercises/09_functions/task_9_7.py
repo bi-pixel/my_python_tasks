@@ -100,16 +100,14 @@ def convert_config_to_dict(config_filename, ignore_lines):
     result = {}
     with open(config_filename) as f:
         for line in f:
-            if line.startswith('!') or not line.strip():
+            line = line.rstrip()
+            if not line or line.startswith('!') or check_for_ignore_lines(line, ignore_lines):
                 continue
-            elif check_for_ignore_lines(line, ignore_lines):
-                continue
-            if not line.startswith(' '):
-                line = line.strip()
+            if line[0].isalnum():
+                section = line
                 result[line] = []
-                key = line
             else:
-                result[key].append(line.strip())
+                result[section].append(line.strip())
         return result
 
 
