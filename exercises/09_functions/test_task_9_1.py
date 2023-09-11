@@ -28,11 +28,12 @@ def test_function_return_value(mac, correct_converted_mac):
     """
 
     return_value = task_9_1.convert_mac(mac)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == str
-    ), f"За завданням функція має повертати рядок, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, str):
+        pytest.fail(
+            f"За завданням функція має повертати рядок, а повертає {type(return_value).__name__}"
+        )
     assert (
         correct_converted_mac == return_value
     ), "Функція повертає неправильне значення"
-

@@ -84,31 +84,4 @@ In [6]: pprint(cfg_dict2, sort_dicts=False)
 У завданнях 9го розділу і далі, крім зазначеної функції, можна створювати
 будь-які додаткові функції.
 """
-from pprint import pprint
-
 ignore = ["duplex", "alias", "configuration"]
-
-
-def check_for_ignore_lines(line, ignore_lines):
-    for word in ignore_lines:
-        if word in line:
-            return True
-    return False
-
-
-def convert_config_to_dict(config_filename, ignore_lines):
-    result = {}
-    with open(config_filename) as f:
-        for line in f:
-            line = line.rstrip()
-            if not line or line.startswith('!') or check_for_ignore_lines(line, ignore_lines):
-                continue
-            if line[0].isalnum():
-                section = line
-                result[line] = []
-            else:
-                result[section].append(line.strip())
-        return result
-
-
-pprint(convert_config_to_dict("config_r2_short.txt", ignore), sort_dicts=False)

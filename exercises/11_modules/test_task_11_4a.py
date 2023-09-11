@@ -1,4 +1,5 @@
 import task_11_4a
+import pytest
 import sys
 
 sys.path.append("..")
@@ -55,10 +56,12 @@ def test_function_return_value():
     }
 
     return_value = task_11_4a.unique_network_map(input_value)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == dict
-    ), f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, dict):
+        pytest.fail(
+            f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
+        )
     assert len(correct_return_value) == len(
         return_value
     ), "У словнику, який описує топологію є лінки, що дублюються"
@@ -86,10 +89,12 @@ def test_function_return_value_different_args():
     }
 
     return_value = task_11_4a.unique_network_map(input_value)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == dict
-    ), f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, dict):
+        pytest.fail(
+            f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
+        )
     assert len(correct_return_value) == len(
         return_value
     ), "У словнику, який описує топологію є лінки, що дублюються"

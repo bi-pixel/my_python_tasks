@@ -1,4 +1,5 @@
 import task_9_4
+import pytest
 import sys
 
 sys.path.append("..")
@@ -64,13 +65,13 @@ def test_function_return_value():
     return_value = task_9_4.generate_access_config(
         access_vlans_mapping, template_access_mode
     )
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"
 
 
 def test_function_return_value_different_args():
@@ -97,10 +98,10 @@ def test_function_return_value_different_args():
     return_value = task_9_4.generate_access_config(
         access_vlans_mapping, template_access_mode
     )
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"

@@ -1,4 +1,5 @@
 import task_21_3
+import pytest
 import sys
 
 sys.path.append("..")
@@ -55,13 +56,13 @@ def test_function_return_value():
     attributes = {"Command": "show ip int br", "Vendor": "cisco_ios"}
 
     return_value = task_21_3.parse_command_dynamic(sh_ip_int_br, attributes)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"
 
 
 def test_function_return_value_different_args():
@@ -76,10 +77,10 @@ def test_function_return_value_different_args():
     attributes = {"Command": "show version", "Vendor": "cisco_ios"}
 
     return_value = task_21_3.parse_command_dynamic(sh_version, attributes)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"

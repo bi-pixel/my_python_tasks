@@ -54,7 +54,9 @@ def test_function_return_value():
     return_value = strip_empty_lines(return_value)
     return_lines = set(return_value.splitlines())
 
-    assert correct_lines == return_lines, "У підсумковій конфігурації ospf не все строки"
+    assert (
+        correct_lines == return_lines
+    ), "У підсумковій конфігурації ospf не все строки"
 
 
 def test_function_different_input():

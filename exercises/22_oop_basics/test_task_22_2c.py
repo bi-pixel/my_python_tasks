@@ -40,7 +40,9 @@ def test_send_config_commands_wrong_commands(
 
     return_value = r1.send_config_commands(command, strict=False)
     stdout, err = capsys.readouterr()
-    assert error in stdout, "Метод send_config_commands не виводить повідомлення про помилку"
+    assert (
+        error in stdout
+    ), "Метод send_config_commands не виводить повідомлення про помилку"
 
     with pytest.raises(ValueError) as excinfo:
         return_value = r1.send_config_commands(command, strict=True)

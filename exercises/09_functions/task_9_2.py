@@ -50,18 +50,3 @@ False
 """
 
 ip_list = ["10.1.1.1", "10.3.a.a", "500.1.1.1", "150.168.100.1", "62.150.240.300"]
-
-
-def check_ip(ip):
-    if len(ip.split('.')) == 4:
-        for oct in ip.split('.'):
-            if not (oct.isdigit() and int(oct) in range(256)):
-                return False
-
-    else:
-        return False
-    return True
-
-
-for ip in ip_list:
-    print(check_ip(ip))

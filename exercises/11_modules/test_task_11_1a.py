@@ -1,3 +1,5 @@
+import pytest
+
 try:
     import task_11_1a
 except OSError:
@@ -5,7 +7,6 @@ except OSError:
         "Для цього завдання функцію треба ОБОВ'ЯЗКОВО викликати у блоці if __name__ == '__main__':"
     )
 
-import pytest
 import sys
 
 sys.path.append("..")
@@ -39,13 +40,13 @@ def test_function_return_value_correct_mac(mac_list, correct_converted_mac_list)
     """
 
     return_value = task_11_1a.convert_mac_list(mac_list)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_converted_mac_list == return_value
-    ), (
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_converted_mac_list == return_value, (
         f"Функція повертає неправильне значення.\nЯкщо функції передається "
         f"як аргумент список {mac_list},\nрезультат має бути {correct_converted_mac_list}"
     )
@@ -88,9 +89,7 @@ def test_function_return_value_wrong_mac_strict_false(
     Перевірка роботи функції
     """
     return_value = task_11_1a.convert_mac_list(mac_list, strict=False)
-    assert (
-        correct_converted_mac_list == return_value
-    ), (
+    assert correct_converted_mac_list == return_value, (
         f"Функція повертає неправильне значення.\nЯкщо функції передається "
         f"як аргумент список {mac_list},\nрезультат має бути {correct_converted_mac_list}"
     )

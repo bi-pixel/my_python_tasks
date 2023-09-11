@@ -1,4 +1,5 @@
 import task_9_3a
+import pytest
 import sys
 
 sys.path.append("..")
@@ -61,13 +62,13 @@ def test_function_return_value_ignore_list():
         ignore_lines=ignore_list,
         ignore_exclamation=False,
     )
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"
 
 
 def test_function_return_value_different_args_1():
@@ -91,13 +92,13 @@ def test_function_return_value_different_args_1():
     return_value = task_9_3a.clean_config(
         "config_r3_short.txt", strip_lines=True, ignore_lines=ignore_list
     )
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"
 
 
 def test_function_return_value_different_args_2():
@@ -125,10 +126,10 @@ def test_function_return_value_different_args_2():
     return_value = task_9_3a.clean_config(
         "config_r3_short.txt", strip_lines=True, delete_empty_lines=False
     )
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"

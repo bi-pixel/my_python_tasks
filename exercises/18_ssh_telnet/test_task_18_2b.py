@@ -1,4 +1,3 @@
-
 import pytest
 import task_18_2b
 import sys
@@ -62,7 +61,8 @@ def test_function_return_value(capsys, first_router_from_devices_yaml):
     )
 
     # проверяем возвращаемое значение
-    assert return_value != None, "Функція нічого не повертає"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
     assert type(return_value) == tuple, "Функція має повертати кортеж"
     assert 2 == len(return_value) and all(
         type(item) == dict for item in return_value

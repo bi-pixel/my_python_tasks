@@ -1,5 +1,6 @@
 import os
 import yaml
+import pytest
 import task_17_3a
 import sys
 
@@ -66,13 +67,13 @@ def test_function_return_value():
     }
 
     return_value = task_17_3a.generate_topology_from_cdp(list_of_cdp_files)
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == dict
-    ), f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, dict):
+        pytest.fail(
+            f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"
 
 
 def test_writing_to_yaml_file(tmpdir):

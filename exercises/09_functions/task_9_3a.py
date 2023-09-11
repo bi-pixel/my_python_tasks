@@ -93,29 +93,3 @@ Out[5]:
 
 ignore_list = ["duplex", "alias exec", "Current configuration", "service"]
 
-
-def check_for_ignore_lines(line, ignore_lines):
-    for word in ignore_lines:
-        if word in line:
-            return True
-    return False
-
-
-def clean_config(config_filename, ignore_lines=None, ignore_exclamation=True,
-                 strip_lines=False, delete_empty_lines=True):
-    with open(config_filename) as conf:
-        result = []
-        for line in conf:
-            if delete_empty_lines:
-                if len(line) == 1:
-                    continue
-            if ignore_exclamation:
-                if line.startswith('!'):
-                    continue
-            if ignore_lines:
-                if check_for_ignore_lines(line, ignore_lines):
-                    continue
-            if strip_lines:
-                line = line.strip()
-            result.append(line)
-    return result

@@ -1,4 +1,5 @@
 import task_15_2
+import pytest
 import sys
 
 sys.path.append("..")
@@ -27,10 +28,12 @@ def test_function_return_value():
     ]
 
     return_value = task_15_2.parse_sh_ip_int_br("sh_ip_int_br.txt")
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
     assert sorted(correct_return_value) == sorted(
         return_value
     ), "Функція повертає неправильне значення"
@@ -49,10 +52,12 @@ def test_function_return_value_different_args():
     ]
 
     return_value = task_15_2.parse_sh_ip_int_br("sh_ip_int_br_2.txt")
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
     assert sorted(correct_return_value) == sorted(
         return_value
     ), "Функція повертає неправильне значення"

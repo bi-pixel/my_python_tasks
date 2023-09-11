@@ -1,4 +1,5 @@
 import task_18_2a
+import pytest
 import sys
 
 sys.path.append("..")
@@ -28,10 +29,12 @@ def test_function_return_value(
         first_router_from_devices_yaml, test_commands
     )
     # проверяем возвращаемое значение
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == str
-    ), f"За завданням функція має повертати рядок, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, str):
+        pytest.fail(
+            f"За завданням функція має повертати рядок, а повертає {type(return_value).__name__}"
+        )
     assert strip_empty_lines(return_value) == strip_empty_lines(
         correct_return_value
     ), "Функція повертає неправильне значення"
@@ -39,7 +42,9 @@ def test_function_return_value(
     correct_stdout = f"connecting to {r1_test_connection.host}"
     stdout, err = capsys.readouterr()
     assert stdout != "", "Повідомлення про помилку не виведено на stdout"
-    assert correct_stdout in stdout.lower(), "Виведено неправильне повідомлення про помилку"
+    assert (
+        correct_stdout in stdout.lower()
+    ), "Виведено неправильне повідомлення про помилку"
 
     return_value = task_18_2a.send_config_commands(
         first_router_from_devices_yaml, test_commands, log=False

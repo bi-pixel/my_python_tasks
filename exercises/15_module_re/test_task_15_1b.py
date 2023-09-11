@@ -1,4 +1,5 @@
 import task_15_1b
+import pytest
 import sys
 
 sys.path.append("..")
@@ -28,10 +29,10 @@ def test_function_return_value():
     }
 
     return_value = task_15_1b.get_ip_from_cfg("config_r2.txt")
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == dict
-    ), f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
-    assert (
-        correct_return_value == return_value
-    ), "Функція повертає неправильне значення"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, dict):
+        pytest.fail(
+            f"За завданням функція має повертати словник, а повертає {type(return_value).__name__}"
+        )
+    assert correct_return_value == return_value, "Функція повертає неправильне значення"

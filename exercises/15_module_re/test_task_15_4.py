@@ -1,4 +1,5 @@
 import task_15_4
+import pytest
 import sys
 
 sys.path.append("..")
@@ -25,10 +26,12 @@ def test_function_return_value():
         "Ethernet1/0",
     ]
     return_value = task_15_4.get_ints_without_description("config_r1.txt")
-    assert return_value != None, "Функція нічого не повертає"
-    assert (
-        type(return_value) == list
-    ), f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+    if return_value is None:
+        pytest.fail("Функція нічого не повертає")
+    if not isinstance(return_value, list):
+        pytest.fail(
+            f"За завданням функція має повертати список, а повертає {type(return_value).__name__}"
+        )
     assert sorted(correct_return_value) == sorted(
         return_value
     ), "Функція повертає неправильне значення"

@@ -44,22 +44,3 @@ Out[5]:
 У завданнях 9го розділу і далі, крім зазначеної функції, можна створювати
 будь-які додаткові функції.
 """
-from pprint import pprint
-
-
-def get_int_vlan_map(config_filename):
-    access_dict = {}
-    trunk_dict = {}
-
-    with open(config_filename) as f:
-        for line in f:
-            if line.startswith('interface'):
-                interface = line.split()[-1]
-            if 'access vlan' in line:
-                access_dict[interface] = int(line.split()[-1])
-            if 'allowed vlan' in line:
-                trunk_dict[interface] = [int(item) for item in line.split()[-1].split(',')]
-        return access_dict, trunk_dict
-
-
-pprint(get_int_vlan_map("config_sw1.txt"))
