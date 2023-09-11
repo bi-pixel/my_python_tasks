@@ -81,5 +81,3 @@ with open(src_conf_file) as src:
             interface_dict[intf].append(line.strip())
 
 pprint(interface_dict)
-
-
